@@ -37,7 +37,9 @@ class RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: Text('Startup Name Generator'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+          IconButton(icon: Icon(Icons.list), onPressed:() {
+            _pushSaved(true);
+          }),
         ],
       ),
       body: _buildSuggestions(),
@@ -69,7 +71,7 @@ class RandomWordsState extends State<RandomWords> {
           },
       ),
       onTap: () {
-        _pushSaved();
+        _pushSaved(false);
       },
     );
   }
@@ -88,7 +90,7 @@ class RandomWordsState extends State<RandomWords> {
         });
   }
 
-  void _pushSaved() {
+  void _pushSaved(bool fullscreenDialog) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(   // Add 20 lines from here...
         builder: (BuildContext context) {
@@ -116,6 +118,7 @@ class RandomWordsState extends State<RandomWords> {
             body: ListView(children: divided),
           );
         },
+        fullscreenDialog: fullscreenDialog
       ),                       // ... to here.
     );
   }
